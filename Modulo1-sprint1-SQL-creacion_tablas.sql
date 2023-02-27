@@ -37,14 +37,31 @@ CREATE TABLE Facturas(
     id_cliente INT NOT NULL,
     PRIMARY KEY (id_factura),
     CONSTRAINT `fk_factura_zapatillas`
-		FOREIGN KEY (`id_zapatillas`)
-        REFERENCES `zapatillas`(id_zapatillas), 
+		FOREIGN KEY (id_zapatillas)
+        REFERENCES Zapatillas (id_zapatillas), 
 	CONSTRAINT `fk_factura_empleado`
-		FOREIGN KEY (`id_empleado`)
-		REFERENCES `empleado`(id_empleado),
+		FOREIGN KEY (id_empleado)
+		REFERENCES Empleados (id_empleado),
     CONSTRAINT `fk_factura_cliente`
-		FOREIGN KEY (`id_cliente`)
-        REFERENCES `cliente`(id_cliente) ON DELETE CASCADE ON UPDATE CASCADE);
+		FOREIGN KEY (id_cliente)
+        REFERENCES Clientes (id_cliente) ON DELETE CASCADE ON UPDATE CASCADE);
+        
+ALTER TABLE Zapatillas
+	ADD COLUMN marca VARCHAR(45) NOT NULL,
+	ADD COLUMN talla INT NOT NULL;
+    
+ALTER TABLE Empleados
+	MODIFY COLUMN salario FLOAT NOT NULL;
+    
+ALTER TABLE Clientes 
+	DROP COLUMN pais;
+
+ALTER TABLE Clientes
+	MODIFY codigo_postal INT,
+	ADD CONSTRAINT `CK_CP` CHECK ((codigo_postal = 5)); 
+    
+ALTER TABLE Facturas
+	ADD COLUMN total FLOAT; 
         
         
     
