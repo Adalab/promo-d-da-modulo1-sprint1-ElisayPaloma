@@ -62,3 +62,4 @@ FROM products
 WHERE discontinued = 0
 ORDER BY product_id DESC
 LIMIT 10;
+
